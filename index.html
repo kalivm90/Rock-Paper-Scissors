@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./javascript.js"></script>
-    <link rel="stylesheet" href="./styles.css">
+    <script src="./assets/javascript/javascript.js"></script>
+    <link rel="stylesheet" href="./assets/styles/styles.css">
     <title>Document</title>
 </head>
 <body>
-    <header>
+    <nav>
         <div class="left">
             <div class="logo">Logo</div>
             <div class="title">Website</div>
@@ -17,19 +17,26 @@
         <div class="right">
             <div class="other">Home</div>
         </div>
-    </header>
-    <div class="score-container">
-        <h1 class="wins">Wins: </h1>
-        <h1 class="loses">Loses: </h1>
-        <h1 class="total">Total: </h1>
-    </div>
-    <div class="flex-container">
-        <button class="rock-btn">Rock</button>
-        <button class="paper-btn">Paper</button>
-        <button class="scissors-btn">Scissors</button>
-    </div>
-    <div class="jumbo">
+    </nav>
 
+    <div class="score-flex">
+        <div class="top">
+            <h3 class="message">The game has already started and we are waiting for you to make your first guess. Please choose one of the following options below.</h3>
+        </div>
+        <div class="bottom">
+            <h1 class="wins">Wins: </h1>
+            <h1 class="loses">Loses: </h1>
+            <h1 class="total">Total: </h1>
+        </div>
     </div>
+
+    <div class="choice-flex">
+        <div class="items">
+            <img id="rock" src="./assets/images/rock.png">
+            <img id="paper" src="./assets/images/paper.png">
+            <img id="scissors" src="./assets/images/scissors.png">
+        </div>
+    </div>
+
 </body>
 </html>

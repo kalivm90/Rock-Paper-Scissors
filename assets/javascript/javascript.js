@@ -44,7 +44,7 @@
 //                 console.log(`${playerGuess.toUpperCase()} is not a valid option, please pick again.`);
 //                 i--;
 //             }
-        
+
 //         }
 
 //     }
@@ -62,8 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // [1][0] paper scissors vs rock and so on
 
     let winArray = [[0, 2, 1],
-                    [1, 0, 2],
-                    [2, 1, 0]]
+    [1, 0, 2],
+    [2, 1, 0]]
 
 
     function getComputerChoice() {
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (win == 1) {
             return [`You lose, ${choices[computer]} beats ${choices[player]}!`, win]
         } else if (win == 2) {
-            return [`You win, ${choices[player]} beats ${choices[computer]}`, win]
+            return [`You win, ${choices[player]} beats ${choices[computer]}!`, win]
         }
     }
 
@@ -95,52 +95,85 @@ document.addEventListener("DOMContentLoaded", () => {
     let winElem = document.querySelector(".wins");
     let loseElem = document.querySelector(".loses");
     let totalElem = document.querySelector(".total");
-
     let buttons = document.querySelectorAll("button")
-    let wins = 0;
-    let lose = 0;
-    let total = 0;
-    const TURNS = 4;
     
+    let wins, lose, total;
+    const TURNS = 4;
+    wins = lose = total = 0;
 
-    buttons.forEach(item => {
-        item.addEventListener("click", e => {
 
-            let computerChoice = getComputerChoice();
-            let playerChoice = e.target.textContent.toLowerCase();
-            let winner = playRound(computerChoice, playerChoice);
+    // buttons.forEach(item => {
+    //     item.addEventListener("click", e => {
+
+    //         let computerChoice = getComputerChoice();
+    //         let playerChoice = e.target.textContent.toLowerCase();
+    //         let winner = playRound(computerChoice, playerChoice);
+
+    //         let message = document.querySelector(".message")
+
+    //         function reset(id, message) {
+    //             let retryMessage = " Choose new selection to start over.";
+    //             wins = 0;
+    //             lose = 0;
+    //             total = 0;
+    //             document.querySelector(id).textContent = message + retryMessage;
+    //         }
+
+
+    //         (winner[1] == 1) ? lose++ : (winner[1] == 2) ? wins++ : {}
+
+    //         if (total == 0 && document.querySelector(".score-flex button")) {
+    //             document.querySelector(".score-flex button").remove()
+    //         }
+
+    //         if (total == 4) {
+    //             (wins > lose) ? reset(".message", "Player Wins!") : (wins < lose) ? reset(".message", "Computer Wins!") : reset(".message", "DRAW!");
+
+    //         } else {
+    //             total++;
+    //             message.textContent = winner[0];
+    //             winElem.innerHTML = `Wins: <span style="color: green"> ${wins} </span>`;
+    //             loseElem.innerHTML = `Loses: <span style="color: maroon"> ${lose} </span>`;
+    //             totalElem.innerHTML = `Total: <span style="color: black;"> ${total} </span>`;
+    //         }
+    //     });
+    // });
+
+    let img = document.querySelectorAll("img")
+    
+    img.forEach(item => {
+        item.addEventListener("click", (e) => {
             
-            let d = document.querySelector(".jumbo");
-            let p = document.createElement("p");
+            let computerChoice = getComputerChoice();
+            let playerChoice = e.target.id.toLowerCase();
+            let winner = playRound(computerChoice, playerChoice);
+
+            let message = document.querySelector(".message")
 
             function reset(id, message) {
-                total, wins, lose = 0;
-                document.querySelector(id).textContent = message;
-                winElem.textContent = "Wins:"
-                loseElem.textContent = "Loses:"
-                totalElem.textContent = "Total:"
+                let retryMessage = " Choose new selection to start over.";
+                wins = lose = total = 0;
+                document.querySelector(id).textContent = message + retryMessage;
             }
 
-
-            (winner[1] == 1) ? lose++ : (winner[1] == 2) ? wins++ : {}
-
-            if (total === 0) {
-                p.textContent = winner[0]
-                p.setAttribute("id", "message")
-                d.classList.add("jumbo-style")
-                p.classList.add("message")
-                d.appendChild(p);
-            } 
-            
-            if (total == 4) {
-                (wins > lose) ? reset("#message", "Player Wins!") : (wins < lose) ? reset("#message", "Computer Wins!") : {};
-            } else {
-                total++;
-
+            function updateScoreboard() {
                 winElem.innerHTML = `Wins: <span style="color: green"> ${wins} </span>`;
                 loseElem.innerHTML = `Loses: <span style="color: maroon"> ${lose} </span>`;
                 totalElem.innerHTML = `Total: <span style="color: black;"> ${total} </span>`;
             }
-        });
-    });
+
+            (winner[1] == 1) ? lose++ : (winner[1] == 2) ? wins++ : {}
+
+            if (total == 4) {
+                total++;
+                updateScoreboard();
+                (wins > lose) ? reset(".message", "Player Wins!") : (wins < lose) ? reset(".message", "Computer Wins!") : reset(".message", "DRAW!");
+            } else {
+                total++;
+                message.textContent = winner[0];
+                updateScoreboard();
+            }
+
+        })
+    })
 });
