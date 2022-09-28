@@ -51,16 +51,14 @@ nav .right {
     margin-right: 20px;
 }
 
-.score-container {
+.score-container, 
+.score-flex {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .score-flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
     background-color: #dadbdd;
     color: black;
